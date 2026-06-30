@@ -196,6 +196,7 @@
     position: relative;
   }
   .project-image svg { width: 60%; height: 60%; opacity: 0.4; }
+  .project-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .project-image .img-label {
     position: absolute;
     bottom: 0.75rem;
@@ -289,7 +290,8 @@
   .detail-meta-row { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 0.5rem; border-bottom: 0.5px solid var(--gray-200); font-size: 0.78rem; }
   .detail-meta-key { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-400); }
   .detail-meta-val { color: var(--black); font-family: var(--sans); font-weight: 300; }
-  .detail-hero-img { width: 100%; aspect-ratio: 16/7; background: var(--blue-light); display: flex; align-items: center; justify-content: center; }
+  .detail-hero-img { width: 100%; aspect-ratio: 16/7; background: var(--blue-light); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .detail-hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .detail-body { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; padding: 4rem 5rem; }
   .detail-section-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue-accent); margin-bottom: 1rem; }
   .detail-body-text { font-size: 0.9rem; color: var(--gray-600); line-height: 1.85; margin-bottom: 2rem; }
@@ -460,14 +462,7 @@
     </div>
     <div class="detail-meta" id="d-meta"></div>
   </div>
-  <div class="detail-hero-img" id="d-hero-img">
-    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" opacity="0.25">
-      <rect x="10" y="10" width="60" height="60" stroke="#4a7fb5" stroke-width="0.75"/>
-      <line x1="10" y1="40" x2="70" y2="40" stroke="#4a7fb5" stroke-width="0.5"/>
-      <line x1="40" y1="10" x2="40" y2="70" stroke="#4a7fb5" stroke-width="0.5"/>
-      <circle cx="40" cy="40" r="15" stroke="#4a7fb5" stroke-width="0.5"/>
-    </svg>
-  </div>
+  <div class="detail-hero-img" id="d-hero-img"></div>
   <div class="detail-body">
     <div>
       <p class="detail-section-label">Overview</p>
@@ -488,8 +483,9 @@ const projects = [
   {
     id: 0,
     category: "Thermal Energy Storage",
-    title: "Packed-Bed CPCM Thermal Storage",
+    title: "Thesis — Thermodynamic and Economic Analysis of Composite Phase Change Material Energy Storage",
     desc: "Dynamic 1D simulation of composite phase-change material packed beds for solar salt HTF systems. Comparative analysis across four bed configurations.",
+    image: "CPCM_tank_illustration.png",
     meta: { "Institution": "DTU — Master's Thesis", "Year": "2025–2026", "Tools": "Python, NumPy, Matplotlib", "Domain": "Latent & Sensible TES", "HTF": "Solar Salt (NaNO₃/KNO₃)", "Configurations": "4 cases (Cases A–D)" },
     overview: "Developed a continuous two-phase 1D model for packed-bed thermal energy storage using a novel SiC/NaNO₃ composite phase-change material (CPCM) with solar salt as the heat transfer fluid. The CPCM is a high-porosity silicon carbide skeletal matrix impregnated with sodium nitrate, delivering thermal conductivity enhancement and shape-stable phase change between 300–312°C. Four packed bed configurations were studied: Case A (CPCM over rock), Case B (rock over CPCM), Case C (CPCM only), and Case D (rock only). The model captures thermocline evolution, liquid fraction dynamics, probe temperature profiles, HTF outlet temperature, instantaneous thermal power, cumulative energy delivery, and exergy performance across the full charge-discharge cycle. At plant scale (5 tanks), Case A achieved the highest exergetic efficiency of 94.88%, the highest cumulative energy delivered of 52.5 MWh, and sustained thermal output past the 8-hour CSP dispatch threshold. All CPCM-containing configurations reached an LCOE of approximately 0.031–0.033 $/kWhe at nominal material cost, competitive with conventional two-tank molten salt storage.",
     roleLabel: "Contribution",
@@ -566,13 +562,13 @@ function renderCards() {
   grid.innerHTML = projects.map(p => `
     <div class="project-card fade-up" onclick="showDetail(${p.id})">
       <div class="project-image" style="background:${getBg(p.category)}">
-        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        ${p.image ? `<img src="${p.image}" alt="${p.title}">` : `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="40" cy="40" r="30" stroke="#4a7fb5" stroke-width="0.75"/>
           <circle cx="40" cy="40" r="18" stroke="#4a7fb5" stroke-width="0.75"/>
           <circle cx="40" cy="40" r="5" fill="#4a7fb5" opacity="0.5"/>
           <line x1="40" y1="10" x2="40" y2="70" stroke="#4a7fb5" stroke-width="0.5"/>
           <line x1="10" y1="40" x2="70" y2="40" stroke="#4a7fb5" stroke-width="0.5"/>
-        </svg>
+        </svg>`}
         <span class="img-label">${p.category}</span>
       </div>
       <div class="project-info">
@@ -613,6 +609,15 @@ function showDetail(id) {
         <span class="spec-key">${k}</span>
         <span class="spec-val">${v}</span>
       </div>`).join('');
+  const heroImg = document.getElementById('d-hero-img');
+  heroImg.innerHTML = p.image
+    ? `<img src="${p.image}" alt="${p.title}">`
+    : `<svg width="80" height="80" viewBox="0 0 80 80" fill="none" opacity="0.25">
+        <rect x="10" y="10" width="60" height="60" stroke="#4a7fb5" stroke-width="0.75"/>
+        <line x1="10" y1="40" x2="70" y2="40" stroke="#4a7fb5" stroke-width="0.5"/>
+        <line x1="40" y1="10" x2="40" y2="70" stroke="#4a7fb5" stroke-width="0.5"/>
+        <circle cx="40" cy="40" r="15" stroke="#4a7fb5" stroke-width="0.5"/>
+      </svg>`;
   const figSection = document.getElementById('d-figures');
   const figGrid = document.getElementById('d-figures-grid');
   if (p.figures && p.figures.length) {
