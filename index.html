@@ -502,11 +502,16 @@ const projects = [
     id: 1,
     category: "Nuclear",
     title: "High-Temperature Rotating Machinery",
-    desc: "Mechanical design and GD&T specification for components operating in molten salt environments at elevated temperatures.",
-    meta: { "Company": "TerraPower", "Domain": "Nuclear TES / Molten Salt", "Tools": "CAD, GD&T, Thermal FEA", "Environment": "High-temperature, controlled atmosphere" },
-    overview: "Supported design and validation of mechanical components for high-temperature rotating machinery in a molten salt reactor context. Work included specifying GD&T callouts for thermally-loaded assemblies and contributing to design-build-test-iterate cycles on prototype hardware.",
+    desc: "Mechanical design and testing of high-temperature pump bearing systems for next-generation molten salt nuclear reactors. Led design, instrumentation, and evaluation across six-plus bearing models.",
+    image: "PumpCloseUp_0.jpg",
+    meta: { "Company": "TerraPower", "Domain": "Nuclear / Molten Salt Pump Systems", "Tools": "CAD, GD&T, Vibration Analysis", "Environment": "High-temperature, controlled atmosphere", "Test Duration": "Thousands of hours", "Bearing Models": "6+ evaluated" },
+    overview: "Work focused on high-temperature pump bearings, which have been identified as a high-risk area for next-generation molten salt nuclear reactors — particularly due to the evaporation or degradation of bearing grease at elevated operating temperatures. Designed four bearing test systems that subject rotary equipment to operational temperatures above 200°C. Led the mechanical design, project schedule and budget, instrumentation, and testing for these systems. Specified GD&T callouts for critical bearing housing and pump shaft components. Over six different bearing models for molten salt pumps were tested and analyzed across the program.",
     roleLabel: "Contribution",
-    role: "Mechanical design ownership including drawing package development, tolerance analysis, and participation in test campaigns. Operated in glove box and positive-pressure cover gas environments."
+    role: "Ownership of the bearing test systems enabled the execution of multiple parallel long-duration tests running for thousands of hours. Vibration data collected during testing and post-mortem analysis of test samples allowed bearing down-selection to be methodical and data-driven. The program delivered a significant advancement in the understanding of bearing greases and bearing types suitable for molten salt pump environments, directly de-risking a critical failure mode in next-generation nuclear energy systems.",
+    figures: [
+      { src: "high_temperature_bearings.webp", caption: "Example: High-temperature bearing assembly — representative of configurations evaluated in the molten salt pump bearing test program. Specific design details are proprietary." },
+      { src: "spectral_data_example.png",      caption: "Example: Vibration spectral data — representative of the post-mortem analysis output used to inform bearing down-selection. Specific test results are proprietary." }
+    ]
   },
   {
     id: 2,
@@ -557,7 +562,7 @@ const projects = [
   {
     id: 6,
     category: "AI Sustainability",
-    title: "The True Carbon Cost of AI: A Lifecycle Assessment of Llama 3.1",
+    title: "Energy in AI",
     desc: "Full lifecycle carbon assessment of Meta's Llama 3.1 405B across embodied emissions, transportation, training, post-training, and inference — deployed on Danish AI infrastructure.",
     image: "energy-in-ai/lca_lifecycle_stages.png",
     meta: { "Institution": "DTU — Special Course", "Year": "2025", "Model": "Llama 3.1 405B (Meta AI)", "Tools": "Python, Ecoinvent LCA Database", "Domain": "Life Cycle Assessment", "Total Footprint": "22,564–49,904 tCO₂e" },
